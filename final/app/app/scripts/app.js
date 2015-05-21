@@ -35,4 +35,9 @@ angular
     return {
       templateUrl: 'views/navbar.html'
     };
+  })
+  .directive('mainCarousel', function(){
+    return {
+      templateUrl: 'views/maincarousel.html'
+    };
   });
