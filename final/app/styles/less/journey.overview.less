@@ -1,0 +1,467 @@
+@import (reference) "common.less";
+
+.medium {
+    font-size: 1.5em;
+}
+.mov-rig {
+    margin-left: 10px;
+}
+.mov-bot {
+    margin-top: 5px;
+}
+
+.icon-started {
+    color: #1BBC9B;
+}
+.icon-missed {
+    color: #D64541;
+}
+
+/****************************
+* Progress Circle Function
+ ***************************/
+
+.show-progress(@circle-size) {
+    @time: 0.8s;
+    width: @circle-size;
+    height: @circle-size;
+    background-color: #cb392c;
+    border-radius: 50%;
+    .circle {
+        .mask, .fill, .shadow {
+            width: @circle-size;
+            height: @circle-size;
+            position: absolute;
+            border-radius: 50%;
+        }
+        .mask, .fill {
+            backface-visibility: hidden;
+            transition: transform @time;
+            border-radius: 50%;
+        }
+        .mask {
+            clip: rect(0px, @circle-size, @circle-size, @circle-size/2);
+            .fill {
+                clip: rect(0px, @circle-size/2, @circle-size, 0px);
+                background-color: #fe5140;
+            }
+        }
+    }
+    @i: 0;
+    @increment: 180deg / 100;
+    .loop (@i) when (@i <=100) {
+        &[data-progress="@{i}"] {
+            .circle {
+                .mask.full, .fill {
+                    transform: rotate(@increment * @i);
+                }
+                .fill.fix {
+                    transform: rotate(@increment * @i * 2);
+                }
+            }
+        }
+        .loop(@i + 1);
+    }
+    .loop(@i);
+}
+
+/****************************
+* Journey Overview Screen
+***************************/
+
+.journey-overview-container {
+    background-color: white;
+}
+
+.journey-overview {
+    padding: 9px 90px;
+    margin: 0px auto 10px auto;
+    .food-types-widget {
+        padding: 10px;
+        border-bottom: 1px solid #e7e7e7;
+        min-height: 55px;
+        .food-type-dropdown {
+            display: none;
+        }
+        .food-type-buttons {
+            button {
+                width: 100px;
+            }
+        }
+        button {
+            margin-right: 5px;
+        }
+        .sort-control {
+            float: right;
+            cursor: pointer;
+            .dropdown-menu {
+                padding: 0px;
+                border-radius: 0px;
+                text-align: center;
+                li {
+                    a{
+                        padding: 8px 0px;
+                        &:hover {
+                            color: #ffffff;
+                            background-color: #B5B5B5;
+                        }
+                    }
+                }
+                .divider {
+                    margin: 0px;
+                }
+            }
+        }
+    }
+    .food-type-overview {
+        min-height: 120px;
+        margin: 20px 0px;
+        .ft-progress {
+            .progress-sprite {
+                position: absolute;
+                background-repeat: no-repeat;
+                background-position: center;
+//                background-image: url("../../images/american-food-icon.png");
+                width: 100%;
+                height: 100%;
+                z-index: 1;
+                top: 0px;
+                left: 0px;
+            }
+            .radial-progress{
+                .show-progress(120px);
+            }
+        }
+        .ft-description {
+            max-width: 400px;
+            .st-progress {
+                color: #a8a8a8;
+            }
+        }
+        .ft-actions {
+            text-align: center;
+            float: right;
+            padding-top: 10px;
+            padding-right: 10px;
+            .duration {
+                background-color: #f1f1f1;
+                padding: 11px 20px;
+                margin-bottom: 15px;
+            }
+        }
+    }
+}
+
+.journey-overview .food-types-widget .food-type-buttons,
+.journey-overview .food-types-widget .food-type-dropdown {
+    float: left;
+}
+
+.journey-overview .food-types-widget .sort-control button,
+.journey-overview .food-types-widget .sort-control button:hover,
+.journey-overview .food-types-widget .sort-control button:active,
+.journey-overview .food-types-widget .sort-control button:focus {
+    border: none;
+    background-color: transparent;
+}
+
+.journey-overview .food-type-overview .ft-progress,
+.journey-overview .food-type-overview .ft-description {
+    position: relative;
+    padding: 10px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.journey-overview-items {
+    padding: 0 90px;
+    margin: 0px auto 10px auto;
+    .ft-item {
+        background-color: #ffffff;
+        position: relative;
+        .fti-header {
+            color: black;
+            margin-left: 0;
+            text-decoration: none;
+        }
+        .arrow {
+            right: 1px;
+            position: absolute;
+            height: 35px;
+            width: 50px;
+            top: 1px;
+            background-color: #f2f2f2;
+            color: #AAA;
+        }
+        .fti-title {
+            vertical-align: middle;
+        }
+        .fti-body {
+            //padding: 5px 30px 5px 0;
+            //display: flex;
+            border-top: solid 1px #e7e7e7;
+            .summary {
+                > div {
+                    padding: 20px;
+                }
+                h3 {
+                    margin-top: 0;
+                }
+                .r-name {
+                    font-weight: bold;
+                }
+                .r-reviews {
+                    color: #a8a8a8;
+                }
+            }
+            .google-map {
+                text-align: center;
+            }
+            .gallery {
+                text-align: center;
+                color: white;
+                text-shadow: 1px 1px 2px #000;
+                position: relative;
+                overflow: hidden;
+                .gallery-container {
+                    width: 100%;
+                    height: 100%;
+                    background: transparent no-repeat scroll center center / cover;
+                    position: absolute;
+                    left: 50%;
+                    top: 50%;
+                    transform: translate(-50%, -50%);
+                    .overlay {
+                        background: linear-gradient(to bottom, #000 0px, rgba(252, 252, 252, 0) 97%, rgba(255, 255, 255, 0) 98%) repeat scroll 0% 0% transparent;
+                        left: 0px;
+                        top: 0px;
+                        position: absolute;
+                        height: 100%;
+                        width: 100%;
+                        img {
+                            margin-top: 45px;
+                            margin-bottom: 5px;
+                        }
+                    }
+                }
+            }
+            .contact {
+                > div {
+                    margin: 20px 0;
+                    overflow: hidden;
+                }
+                hr {
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+                    border-top-color: #a8a8a8;
+                }
+                .r-status {
+                    font-weight: bold;
+                }
+                .r-status.open {
+                    color: green;
+                }
+                .r-status.closed {
+                    color: red;
+                }
+            }
+            .review {
+                blockquote {
+                    margin: 20px 0;
+                }
+                img {
+                    margin: 0 20px 70px 0;
+                }
+                .fa {
+                    color: #ccc;
+                }
+            }
+        }
+    }
+    .fti-body {
+        .r-rating {
+            unicode-bidi: bidi-override;
+            width: 50px;
+            height: 10px;
+            background-repeat: no-repeat;
+            display: inline-block;
+            span.star {
+                font-family: FontAwesome;
+                font-weight: normal;
+                font-style: normal;
+                display: inline-block;
+            }
+            span.star:before {
+                content: "\f006";
+                padding-right: 0px;
+                color: #FFB800;
+            }
+            span.star-active:before {
+                content: "\f005";
+                color: #FFB800;
+            }
+        }
+    }
+}
+
+/* Tablet adjustments */
+
+@media (max-width: @tablet_mediaquery_value) {
+    .journey-overview {
+        .food-type-overview {
+            margin: 10px 0px;
+            .ft-description {
+                max-width: 350px;
+                margin: 0px 10px;
+                h5 {
+                    margin-top: 0px;
+                }
+            }
+        }
+    }
+    .journey-overview,
+    .journey-overview-items {
+        padding: 0 20px;
+        .food-types-widget {
+            button {
+                margin-right: 0px;
+            }
+        }
+    }
+}
+
+/* Mobile adjustments */
+
+@media (max-width: @mobile_mediaquery_value) {
+    .journey-overview .food-type-overview .ft-progress,
+    .journey-overview .food-type-overview .ft-description,
+    .journey-overview .food-type-overview .ft-actions {
+        padding: 5px;
+    }
+    .journey-overview {
+        .food-type-overview {
+            .ft-progress {
+                .radial-progress {
+                    .show-progress(70px);
+                }
+            }
+            .ft-description {
+                max-width: inherit;
+                width: 75%;
+            }
+            .ft-actions {
+                float: none;
+                clear: both;
+            }
+        }
+        .food-types-widget {
+            .food-type-buttons {
+                display: none;
+            }
+            .food-type-dropdown {
+                display: inline;
+
+                .dropdown{
+                    button {
+                        color: #ffffff;
+                        background-color: #fe5140;
+                        .caret {
+                            margin-left: 50px;
+                        }
+                    }
+                }
+                .open {
+                    button {
+                        background-color: #cb3729;
+                    }
+                }
+            }
+            button {
+                background-color: #fe5140;
+            }
+            .sort-control {
+                float: right;
+                cursor: pointer;
+                .dropdown-menu {
+                    li {
+                        a {
+                            &:hover {
+                                background-color: #B5B5B5;
+                            }
+                        }
+                    }
+                }
+                &.open {
+                    background-color: #F0F0F0;
+                }
+            }
+            .food-type-dropdown {
+                .dropdown-menu {
+                    li {
+                        a {
+                            &:hover {
+                                background-color: #fe5140;
+                            }
+                        }
+                    }
+                }
+            }
+            .sort-control,
+            .food-type-dropdown {
+                .dropdown-menu {
+                    padding: 0px;
+                    border-radius: 0px;
+                    text-align: center;
+                    width: 90vw;
+                    margin-top: 10px;
+                    li {
+                        a {
+                            padding: 20px 40px;
+                            &:hover {
+                                color: #ffffff;
+                            }
+                        }
+                    }
+                    .divider {
+                        margin: 0px;
+                    }
+                }
+            }
+        }
+    }
+    .ft-item {
+        .fti-body {
+            .contact {
+                max-height: 7em;
+                .well {
+                    margin: 0 20px !important;
+                }
+                .r-wtime {
+                    display: none;
+                }
+                .r-phone, .r-website {
+                    line-height: 1.5em;
+                    font-size: 1.1em;
+                }
+            }
+        }
+    }
+    .journey-overview .food-type-overview .ft-actions div,
+    .journey-overview .food-type-overview .ft-actions button {
+        width: 49.8%;
+        float: left;
+        padding: 10px 20px;
+    }
+    .circleContainer {
+        width: 70px;
+        height: 70px;
+        line-height: 45px;
+    }
+    .journey-overview-items .ft-item .fti-body .gallery,
+    .journey-overview-items .ft-item .fti-body .google-map {
+        display: none;
+    }
+    .journey-overview-items .ft-item blockquote{
+        border-left: none;
+    }
+}

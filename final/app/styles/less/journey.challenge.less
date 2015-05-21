@@ -1,0 +1,315 @@
+@import (reference) "common.less";
+/****************************
+ * Journey Challenge Screen
+ ***************************/
+#cont{
+    padding:0;
+}
+
+.journey-challenge {
+    .breadcrumb {
+        display: block;
+        color: #FE5140;
+        font-weight: bold;
+        background-color: transparent;
+        margin: 6px 30px;
+        .current-journey-name {
+            color: #a8a8a8;
+        }
+    }
+    .challenge {
+        width: 90%;
+        margin: auto;
+        padding: 20px 20px 0 20px;
+        background-color: white;
+        box-shadow: 0 4px 9px 0 rgba(0, 0, 0, 0.75);
+        .ch-header {
+            .next {
+                float: right;
+            }
+            .ch-number {
+                color: white;
+            }
+            .ch-title {
+                margin-left: 15px;
+                font-weight: bold;
+                font-size: 18px;
+            }
+            .challenge-status {
+                color: #a8a8a8;
+                font-weight: bold;
+                margin-left: 8px;
+            }
+        }
+        .ch-body {
+            margin: 0;
+            .table {
+                display: table;
+            }
+            .map-img-container{
+                display: table-row-group;
+                height: 25em;
+                .food-info, .map {
+                    height: 300px;
+                    width: 48%;
+                    display: table-cell;
+                    background-position: center;
+                    background-size: cover;
+                    float: none;
+                }
+                .food-info{
+                    overflow: hidden;
+                    border-right: 5px solid #ffffff;
+                    background-image: url(../images/challenge-gallery-preview.jpg);
+                }
+                .map{
+                    border-left: 5px solid #ffffff;
+                    //background-image: url(../images/map-example.jpg);
+                }
+            }
+            .contact-description-container {
+                position: relative;
+                margin: 15px 0px;
+                display: inline-block;
+                width: 100%;
+                .description {
+                    padding-left: 0;
+                }
+                .contact {
+                    padding: 15px 25px;
+                    overflow: hidden;
+                    background-color: #F0F0F0;
+                    font-size: 14px;
+                    max-height: 180px;
+                    hr {
+                        margin: 20px 0;
+                        border-top-color: #a8a8a8;
+                    }
+                    .r-status {
+                        font-weight: bold;
+                    }
+                    .r-status.open {
+                        color: green;
+                    }
+                    .r-status.closed {
+                        color: red;
+                    }
+                }
+            }
+            .body-actions {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                padding: 0;
+                .resend-btn {
+                    color: #2DB2FF;
+                    background-color: #F8F8F8;
+                    position: relative;
+                    border-color: transparent;
+                    padding: 10px 50px;
+                }
+            }
+        }
+    }
+    .row {
+        margin-right: 0;
+        margin-left: 0;
+    }
+    .actions, .status {
+        .completed {
+            padding: 10px;
+            font-size: 1em;
+            font-weight: normal;
+            text-align: center;
+            background-color: #E0E0E0;
+            display: block;
+            width: 100%;
+            border: 1px solid rgba(0, 0, 0, 0);
+        }
+        button {
+            padding: 10px;
+        }
+        .blue {
+            background-color: #2DB2FF;
+            color: #ffffff;
+            &:hover {
+                background-color: #35c5ff;
+            }
+        }
+        .gray {
+            border: none;
+            background-color: #e7e7e7;
+        }
+        .white {
+            background-color: #F8F8F8;
+            &:hover {
+                background-color: #e4e3f5;
+            }
+        }
+    }
+    .actions {
+        position: relative;
+        margin: 30px 57px;
+        .btn{
+            width: 80%;
+            position: relative;
+            left: 20px;
+        }
+        .next {
+            float: right;
+        }
+    }
+    .status {
+        .col-sm-4 {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translate(-50%, 0px);
+        }
+    }
+}
+
+.journey-challenge .challenge .ch-body .food-info,
+.journey-challenge .challenge .ch-body .map {
+    position: relative;
+}
+
+.journey-challenge .actions .challenge-completed,
+.journey-challenge .actions .challenge-completed:hover {
+    background-color: #e7e7e7;
+    border-color: #e7e7e7;
+    cursor: default;
+}
+
+.provide-reason, .feedback {
+    text-align: center;
+    button {
+        width: 150px;
+    }
+    .modal-header {
+        border-bottom-color: transparent;
+        font-weight: bold;
+        position: relative;
+        top: 10px;
+    }
+    .modal-body {
+        font-size: 16px;
+        textarea {
+            width: 85%;
+            height: 137px;
+            resize: none;
+            padding-top: 14px;
+            padding-left: 12px;
+            border-color: #E3E5E8;
+        }
+        .modal-body-bottom {
+            margin-bottom: 39px;
+            font-size: 17px;
+        }
+        .modal-body-top {
+            margin-bottom: 2px;
+            font-size: 17px;
+            position: relative;
+            top: 6px;
+        }
+    }
+    .modal-footer {
+        border-top-color: transparent;
+        text-align: center;
+        margin-bottom: 15px;
+    }
+
+    .modal-resize {
+        width: 81%;
+        margin-left: 10%;
+        margin-top: 30px;
+        border-radius: initial;
+    }
+}
+
+/* Tablet adjustments */
+@media (max-width: @tablet_mediaquery_value) {
+    .journey-challenge {
+        .breadcrumb{
+            margin: 6px 10px;
+        }
+        .challenge {
+            width: 95%;
+            .ch-body .body-actions {
+                margin-top: 5px;
+            }
+        }
+        .actions {
+            margin: 30px;
+            .next, .previous {
+                padding: 0;
+                width: 50%;
+                .btn {
+                    padding: 15px 0;
+                    width: 100%;
+                    left: 0;
+                }
+            }
+        }
+        .status .col-sm-4 {
+            padding: 0;
+            position: relative;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            transform: translate(0, 0);
+            .completed {
+                padding: 20px;
+            }
+        }
+    }
+}
+
+/* Mobile adjustments */
+@media (max-width: @mobile_mediaquery_value) {
+    .journey-challenge .actions,
+    .journey-challenge .challenge {
+        margin: 0;
+        width: 100%;
+    }
+    .journey-challenge {
+        .breadcrumb {
+            margin: 10px 10px;
+            font-size: 1.2em;
+        }
+        .challenge .ch-body .contact-description-container {
+            .description {
+                padding: 0;
+            }
+            .contact {
+                padding: 10px 30px;
+                background-color: #F0F0F0;
+                font-size: 14px;
+                max-height: 150px;
+                width: 49%;
+                hr {
+                    margin: 10px 0;
+                    border-top-color: #a8a8a8;
+                }
+            }
+            .body-actions {
+                width: 49%;
+                right: 0;
+                left: auto;
+                .resend-btn{
+                    padding: 50px 0;
+                    width: 100%;
+                }
+            }
+        }
+        .actions {
+            display: none;
+        }
+        .status {
+            margin-top: 30px;
+            .col-sm-4 .completed {
+                padding: 25px;
+            }
+        }
+    }
+}

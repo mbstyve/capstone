@@ -1,0 +1,116 @@
+@import (reference) "common.less";
+/****************************
+ * Journey Screen
+ ***************************/
+
+/* Main journey styles */
+    .journey {
+        .journey-welcome {
+            padding-top: 25px;
+            padding-bottom: 15px;
+            font-family: 'ProximaNova', Helvetica, Arial, sans-serif;
+            font-size: 30px;
+            .journey-welcome-title {
+                font-weight: normal;
+            }
+        }
+        .food-type-container {
+            padding-top: 35px;
+            .journey-progress {
+                background-color: #CB3729;
+                min-height: 150px;
+                font-weight: normal;
+                a{
+                    color: white;
+                }
+                a:hover {
+                    color: white;
+                }
+                img {
+                    padding-right: 10px;
+                }
+                .journey-title {
+                    position: absolute;
+                    padding-top: 60px;
+                    font-size: 25px;
+                    text-align: center;
+                    width: 100%;
+                    padding-right: 30px;
+                }
+                //The progress bar behind the journey title
+                //You can modify it by changing width percentage.
+                .progress-background {
+                    width: 0%;
+                    height: 150px;
+                    background-color: @lightred;
+                    padding: 0px;
+                }
+                .progress-percentage {
+                    margin-top: 5px;
+                    font-size: 16px;
+                    opacity: 0.5;
+                }
+            }
+            .description {
+                background-color: white;
+                min-height: 150px;
+                padding: 20px 15px 10px 15px;
+                font-size: 14px;
+            }
+            .duration {
+                font-weight: bold;
+            }
+        }
+    }
+
+/* Tablet adjustments */
+
+@media (min-width:@mobile_mediaquery_value) and (max-width:@tablet_mediaquery_value) {
+    .journey {
+        .food-type-container {
+            width: 42%;
+        }
+        .journey-american{
+            margin-left: 8.5%;
+        }
+        .journey-japanese{
+            margin-left: 8.5%;
+        }
+    }
+}
+
+/* Mobile ajustments */
+
+@media (max-width: @mobile_mediaquery_value) {
+    .journey {
+        .journey-welcome {
+            padding-top: 10px;
+            span {
+                display: block;
+            }
+        }
+        .food-type-container {
+            margin-bottom: 10px;
+            .journey-progress {
+                min-height: 130px;
+                .journey-title {
+                    padding-top: 50px;
+                }
+                .progress-background {
+                    height: 130px;
+                }
+                .sprites {
+                    margin: 0 auto;
+                }
+                .food-name-type {
+                    line-height: 0px;
+                }
+            }
+            .description {
+                padding-top: 35px;
+                padding-bottom: 35px;
+                min-height: 150px;
+            }
+        }
+    }
+}
